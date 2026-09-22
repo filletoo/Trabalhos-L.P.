@@ -1,0 +1,25 @@
+Total de linhas: 24
+
+Total de palavras: 45
+
+Total de palavras distintas: 26
+
+Palavras mais frequentes (frequencia 5):
+- de
+
+10 Palavras mais frequentes:
+#1 (frequencia 5):
+- de
+#2 (frequencia 4):
+- palavras
+#3 (frequencia 3):
+- total
+- frequencia
+- 2
+#4 (frequencia 2):
+- mais
+- frequentes
+- sebastiao
+- cheio
+- leite
+- 1
