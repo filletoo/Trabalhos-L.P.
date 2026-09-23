@@ -7,17 +7,16 @@ def remover_espacos_extremidades(nome):
     nome_sem_espaco += nome[len(nome) - 1]
     return nome_sem_espaco
 
-def cadastrarNomes():
+def cadastrar_nomes():
     print('Digite "sair" quando terminar de digitar nomes')
     nomes = []
 
     while True:
         nome = input("Digite um nome: ")
-        print(nome)
+        # print(nome)
         if nome.lower() == "sair":
             break
         if nome != '':
-            #ver se adiciona o removedor de espacos dps
             nomes.append(remover_espacos_extremidades(nome))
 
     #print(nomes)
@@ -51,7 +50,7 @@ def maiores_nomes(nomes):
         
     return maiores
 
-if cadastrarNomes():
+if cadastrar_nomes():
     with open("nomes.txt", mode="r") as f:
         nomes = f.read()
 
@@ -59,6 +58,7 @@ if cadastrarNomes():
 
     maiores = maiores_nomes(nomes)
 
+    print("------------------------------------------------------------")
     print("Nomes cadastrados:")
     for n in nomes:
         print(f"- {n}")
@@ -71,4 +71,4 @@ if cadastrarNomes():
 else:
     print("Nenhum nome foi cadastrado.")   
 
-print()
+print("------------------------------------------------------------")

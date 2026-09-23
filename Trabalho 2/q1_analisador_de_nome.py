@@ -14,10 +14,21 @@ def contar_char_sem_espaco(nome):
 
     return quant
 
+def ler_nome():
+    while True:
+        nome = input("Digite seu nome completo:\n")
+        if nome != '': 
+            break
+        else: 
+            print("Nome não pode ser vazio")
+
+    return nome
+
 if __name__ == "__main__":
-    nome = input("Digite seu nome completo:\n")
-    nome_separado = nome.split()
+    nome = ler_nome()
+    
     nome = remover_espacos_extremidades(nome)
+    nome_separado = nome.split()
     quant_char = contar_char_sem_espaco(nome)
     quant_pal = len(nome_separado)
     

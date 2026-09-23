@@ -1,5 +1,5 @@
 def remover_pontuacao(texto):
-    pontuacao = ",.!?:;()—-#"
+    pontuacao = ",.!?:;()—#"
     for p in pontuacao:
         texto = texto.replace(p, " ")
 
@@ -12,7 +12,7 @@ def frequencias(texto):
 
     return freq
 
-def mais_frequentes(freq, quant):
+def mais_frequentes(freq, quant = 1):
     top_freq = [] #maiores frequencias
     pal_mais_freq = {} #palavras mais frequentes
     for palavra in freq:
@@ -33,45 +33,56 @@ def mais_frequentes(freq, quant):
 
 def lerLinhas(arquivo):
     linhas = []
-    with open(arquivo, mode="r") as f:
-        linha = "ç"
-        while linha != "":
-            linha = f.readline()
-            if linha == "": break
+    try:
+        with open(arquivo, mode="r") as f:
+            linha = "ç"
+            while linha != "":
+                linha = f.readline()
+                if linha == "": break
 
-            if not linha.isspace():
-                linhas.append(remover_pontuacao(linha).lower())
+                if not linha.isspace():
+                    linhas.append(remover_pontuacao(linha).lower())
+
+    except FileNotFoundError:
+        return False
 
     return linhas
 
 if __name__ == '__main__':
     texto_linhas = lerLinhas("texto.txt")
 
-    palavras = []
-    for linha in texto_linhas:
-        for palavra in linha.split():
-            palavras.append(palavra)
+    if type(texto_linhas) == bool and not texto_linhas:
+        print('Não foi possível encontrar o arquivo "texto.txt"')
 
-    freq = frequencias(palavras)
+    elif len(texto_linhas) == 0:
+        print("O arquivo está vazio")
+        
+    else:
+        palavras = []
+        for linha in texto_linhas:
+            for palavra in linha.split():
+                palavras.append(palavra)
 
-    mais_freq = mais_frequentes(freq, 1)
-    mais_freq_10 = mais_frequentes(freq, 10)
+        freq = frequencias(palavras)
 
-    with open("relatorio.txt", "w") as f:
-        f.write(f"Total de linhas: {len(texto_linhas)}\n")
-        f.write(f"\nTotal de palavras: {len(palavras)}\n")
-        f.write(f"\nTotal de palavras distintas: {len(set(palavras))}\n")
-        f.write(f"\nPalavras mais frequentes (frequencia {max(mais_freq)}):\n")
+        mais_freq = mais_frequentes(freq, quant=1)
+        mais_freq_10 = mais_frequentes(freq, quant=10)
 
-        for p in mais_freq:
-            for i in mais_freq[p]:
-                f.write(f"- {i}\n")
+        with open("relatorio.txt", "w") as f:
+            f.write(f"Total de linhas: {len(texto_linhas)}\n")
+            f.write(f"\nTotal de palavras: {len(palavras)}\n")
+            f.write(f"\nTotal de palavras distintas: {len(set(palavras))}\n")
+            f.write(f"\nPalavras mais frequentes (frequencia {max(mais_freq)}):\n")
 
-        k = 1
-        f.write(f"\n10 Palavras mais frequentes:\n")
-        for p in mais_freq_10:
-            f.write(f"#{k} (frequencia {p}):\n")
-            for i in mais_freq_10[p]:
-                f.write(f"- {i}\n")
+            for p in mais_freq:
+                for i in mais_freq[p]:
+                    f.write(f"- {i}\n")
 
-            k += 1
+            k = 1
+            f.write(f"\n10 Palavras mais frequentes:\n")
+            for p in mais_freq_10:
+                f.write(f"#{k} (frequencia {p}):\n")
+                for i in mais_freq_10[p]:
+                    f.write(f"- {i}\n")
+
+                k += 1

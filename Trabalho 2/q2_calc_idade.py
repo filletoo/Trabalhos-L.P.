@@ -3,13 +3,15 @@ from datetime import *
 def lerData():
     while True:
         nascimento = input("Data de nascimento (dd/mm/aaaa): ")
-
         data_nascimento = nascimento.split('/')
-
+        if len(data_nascimento) != 3:
+            print("Data inválida")
+            continue
+    
         try:
             data = date(int(data_nascimento[2]), int(data_nascimento[1]), int(data_nascimento[0]))
             if data > date.today():
-                print("Data de nascimento inválida")
+                print("Data inválida")
             else:
                 break
         except ValueError:
@@ -17,11 +19,20 @@ def lerData():
 
     return data
 
-def calc_idade(data_nascimento):
-    aniver = date(date.today().year, data_nascimento.month, data_nascimento.day)
-    idade = (date.today() - data_nascimento).days//365
+def ajustar_data_bissexta(data, ano):
+    eh_bissexto = (data.year % 100 == 0 and data.year % 400 == 0) or (data.year % 4 == 0 and not data.year % 100 == 0)
+    if eh_bissexto and data.day == 29 and data.month == 2:
+        data = date(ano, 3, 1)
+    else:
+        data = date(ano, data.month, data.day)
 
-    if aniver > date.today():
+    return data
+
+def calc_idade(data_nascimento):
+    aniversario = ajustar_data_bissexta(data_nascimento, date.today().year)
+    idade = date.today().year - data_nascimento.year
+
+    if aniversario > date.today():
         idade -= 1
 
     return idade
@@ -74,7 +85,7 @@ def mes_do_ano(mes):
 
 def prox_niver(data_nascimento):
     idade = calc_idade(data_nascimento)
-    prox = date(data_nascimento.year + idade + 1, data_nascimento.month, data_nascimento.day)
+    prox = ajustar_data_bissexta(data_nascimento, data_nascimento.year + idade + 1)
 
     return prox
 

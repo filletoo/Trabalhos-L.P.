@@ -1,25 +1,19 @@
-Total de linhas: 24
+Total de linhas: 5
 
-Total de palavras: 45
+Total de palavras: 9
 
-Total de palavras distintas: 26
+Total de palavras distintas: 6
 
-Palavras mais frequentes (frequencia 5):
-- de
+Palavras mais frequentes (frequencia 3):
+- qwe
 
 10 Palavras mais frequentes:
-#1 (frequencia 5):
-- de
-#2 (frequencia 4):
-- palavras
-#3 (frequencia 3):
-- total
-- frequencia
-- 2
-#4 (frequencia 2):
-- mais
-- frequentes
-- sebastiao
-- cheio
-- leite
-- 1
+#1 (frequencia 3):
+- qwe
+#2 (frequencia 2):
+- q
+#3 (frequencia 1):
+- sqweq
+- e
+- qwee
+- ew

@@ -68,8 +68,8 @@ if __name__ == '__main__':
         print(f"- {i}: {frequencias.get(i, 0)} vez(es)")
 
     print(f"\nMédia das somas: {media:.2f}")
-    print(f"Somas mais frequentes (frequencia: {frequencias[mais_frequentes[0]]}): ", end="")
 
+    print(f"Somas mais frequentes (frequencia: {frequencias[mais_frequentes[0]]}): ", end="")
     for i in range(len(mais_frequentes)):
         if i != len(mais_frequentes) - 1:
             print(f"{mais_frequentes[i]}", end=", ")

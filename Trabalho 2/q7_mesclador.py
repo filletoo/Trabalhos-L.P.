@@ -1,13 +1,17 @@
-def lerNomes(arquivo):
+def ler_nomes(arquivo):
     nomes = []
-    with open(arquivo, mode="r") as f:
-        linha = "ç"
-        while linha != "":
-            linha = f.readline()
-            if linha == "": break
+    try: 
+        with open(arquivo, mode="r") as f:
+            linha = "ç"
+            while linha != "":
+                linha = f.readline()
+                if linha == "": break
 
-            if not linha.isspace():
-                nomes.append(remover_espacos_extremidades(linha))
+                if not linha.isspace():
+                    nomes.append(remover_espacos_extremidades(linha))
+
+    except FileNotFoundError:
+        return False
 
     return nomes
 
@@ -41,15 +45,18 @@ def remover_duplicatas_e_ordenar(nomes_a, nomes_b):
     return lista_final
 
 if __name__ == "__main__":
-    nomes_a = lerNomes("lista_a.txt")
-    nomes_b = lerNomes("lista_b.txt")
+    nomes_a = ler_nomes("lista_a.txt")
+    nomes_b = ler_nomes("lista_b.txt")
 
-    lista_final = remover_duplicatas_e_ordenar(nomes_a, nomes_b)
+    if (type(nomes_a) == bool and not nomes_a) or (type(nomes_b) == bool and not nomes_b):
+        print("Não foi possível encontrar algum ou ambos os arquivos")
+    else:
+        lista_final = remover_duplicatas_e_ordenar(nomes_a, nomes_b)
+        
+        escreverNomes("lista_final.txt", lista_final)
 
-    escreverNomes("lista_final.txt", lista_final)
-
-    print("--------------------------------------------------------------------------")
-    print(f'Quantidade de nomes no arquivo "lista_a.txt": {len(nomes_a)}')
-    print(f'Quantidade de nomes no arquivo "lista_b.txt": {len(nomes_b)}')
-    print(f'Quantidade de nomes distintos na lista final : {len(lista_final)}')
-    print("--------------------------------------------------------------------------")
+        print("--------------------------------------------------------------------------")
+        print(f'Quantidade de nomes no arquivo "lista_a.txt": {len(nomes_a)}')
+        print(f'Quantidade de nomes no arquivo "lista_b.txt": {len(nomes_b)}')
+        print(f'Quantidade de nomes distintos na lista final : {len(lista_final)}')
+        print("--------------------------------------------------------------------------")
