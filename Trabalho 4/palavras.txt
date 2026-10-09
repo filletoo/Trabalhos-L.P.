@@ -1,0 +1,8 @@
+python
+algoritmo
+terminal
+programacao
+computador
+variavel
+funcao
+lista
